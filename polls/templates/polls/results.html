@@ -1,0 +1,33 @@
+
+{% extends "base.html" %}
+
+{% block pageName %}Survey{% endblock %}
+{% block name2 %} Survey {% endblock %}
+{% block content%}
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+
+                    <div class="card-body">
+                        {% for stu_name in student_name %}
+                            <p class="font-weight-bold">Student Name</p>
+                            <p class="text-success">{{ stu_name.name }}</p>
+                        {% endfor %} 
+
+                        {% for question in survey %}
+                            <p class="font-weight-bold">{{ question.question.question_text }}</p>
+                            <p class="text-success">{{ question.answer }}</p>
+                        {% endfor %}      
+                        {% for remark in remarks %}  
+                            <p class="font-weight-bold">Remarks</p> 
+                            <p class="text-secondary">{{ remark.remarks }}</p>
+                        {% endfor %}                 
+                    </div>
+                    
+                
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block pageName %}Notifications{% endblock %}
+{% block name2 %} Notifications {% endblock %}
+{% block content%}
+
+    <div class="col-xl-12 col-md-12">
+        <div class="card latest-update-card">
+            <div class="card-header mb-4">
+                <h3>Latest Activity</h3>
+
+            </div>
+            <div class="card-block">
+                <div class="scroll-widget">
+                    <div class="latest-update-box">
+                        {% for action in actions %}
+                            
+                            {% with userr=action.user %}
+                                {% if action.target %}
+                                    {% if action.target.approved_for_academic %}
+                                        <div class="row  pb-30">
+                                            <div class="col-auto text-right update-meta pr-0">
+                                                <i class="b-primary update-icon ring"></i>
+                                            </div>
+                                            <div class="col pl-5">
+                                                <!--<a href="{% url 'assessments:student_detail' user.id %}" class="d-flex ">-->
+                                                    <!--<h6>{{ user.get_full_name }}</h6> - -->
+                                                    <!--<span class="text-muted mb-0">{{ action.created|timesince }} ago</span>-->
+                                                <!--</a>-->
+
+                                                    <a href="{% url 'assessments:student_detail' user.id %}"><h6 class="mb-5">{{ userr.get_full_name }} <span class="text-muted float-right f-14">{{ action.created|timesince }} ago</span></h6></a>
+                                                    <p class="text-muted mb-10">{{ action.verb }}
+                                                        {% with target=action.target %}
+                                                            <a
+                                                                {% if action.verb == verb %}
+                                                                    href="{%  url 'assessments:detail' target.id %}"
+                                                                {% else %}
+                                                                    href="{{ target.log.get_absolute_url }}"
+                                                                {% endif%}
+                                                                class="text-blue"
+                                                            >
+                                                                document
+
+                                                            </a>
+                                                        {% endwith %}
+                                                    </p>
+
+                                            </div>
+                                        </div>
+                                    {% endif %}  
+                                {% endif %}
+                            {% endwith %}
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% endblock %}

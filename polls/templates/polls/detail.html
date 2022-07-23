@@ -1,0 +1,39 @@
+
+
+
+{% extends "base.html" %}
+
+{% block pageName %}Survey{% endblock %}
+{% block name2 %} Survey {% endblock %}
+{% block content%}
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+
+                <form action="{% url 'polls:vote' question.id %}" method="post">
+                    {% csrf_token %}
+                    <div class="card-body">
+
+                    
+                        
+
+                        <fieldset>
+                            <legend><h4>{{ question.question_text }}</h4></legend>
+                            {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+                            {% for choice in question.choices.all %}
+                                <input class="form-control" type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+                                <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+                            {% endfor %}
+                        </fieldset>
+                        <button type="submit" class="btn btn-secondary my-3"><i class="ik ik-clipboard"></i>Next</button>
+                        
+                    </div>
+                    
+                </form>
+                
+            </div>
+        </div>
+    </div>
+{% endblock %}

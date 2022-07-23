@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block pageName %}Update Programme{% endblock %}
+{% block name2 %}Update Programme{% endblock %}
+{% block content%}
+
+    <form action="" method="post">
+        {{ form.programme }}
+        {% csrf_token %}
+        <button type="submit" class="btn btn-secondary my-3"><i class="ik ik-refresh"></i>Update</button>
+
+    </form>
+
+{% endblock %}

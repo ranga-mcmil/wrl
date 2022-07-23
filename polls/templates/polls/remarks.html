@@ -1,0 +1,46 @@
+
+{% extends "base.html" %}
+
+{% block pageName %}Remarks{% endblock %}
+{% block name2 %} Remarks {% endblock %}
+{% block content%}
+
+
+    
+
+    {% if user.type == 'SUPERVISOR' or user.type == 'WORK_SUPERVISOR' %}
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+
+                        <div class="card-body">    
+                            <p class="font-weight-bold">Remarks</p>
+                            {% for remark in remarks %}  
+                                <p>{{ remark.user.get_full_name }}</p> 
+                                <p class="text-secondary">{{ remark.remarks }}</p>
+                            {% endfor %}                 
+                        </div>
+                        
+                    
+                </div>
+            </div>
+        </div>
+
+    {% elif user.type == 'STUDENT' %}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <form action="" method="post" enctype="multipart/form-data">
+                        <div class="card-body">
+                            <label for="" class="d-block pt-4 font-weight-bold">Add Remarks</label>
+                            {{ form.remarks }}
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-secondary my-3"><i class="ik ik-clipboard"></i>Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

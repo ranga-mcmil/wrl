@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block pageName %}Add WRL Supervisor{% endblock %}
+{% block name2 %}Add WRL Supervisor{% endblock %}
+{% block content%}
+
+    <form action="" method="post">
+        {{ form.supervisor }}
+        {% csrf_token %}
+        <button type="submit" class="btn btn-secondary my-3"><i class="ik ik-plus"></i>Add</button>
+
+    </form>
+
+{% endblock %}

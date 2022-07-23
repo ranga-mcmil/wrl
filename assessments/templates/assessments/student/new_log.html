@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block pageName %}New Upload{% endblock %}
+{% block name2 %} New {% endblock %}
+{% block content%}
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+
+                <form action="" method="post" enctype="multipart/form-data">
+
+                    <div class="card-body">
+
+                        <div>
+                            <label for="" class="d-block font-weight-bold">Upload Document</label>
+                            {{ form.document }}
+                        </div>
+                        <label for="" class="d-block pt-4 font-weight-bold">Description</label>
+                        {{ form.description }}
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-secondary my-3"><i class="ik ik-clipboard"></i>Submit</button>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

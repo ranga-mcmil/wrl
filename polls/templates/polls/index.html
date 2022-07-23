@@ -1,0 +1,92 @@
+
+
+
+
+
+
+
+{% extends "base.html" %}
+
+{% block pageName %}Survey{% endblock %}
+{% block name2 %} Survey {% endblock %}
+{% block content%}
+
+    {% if user.type == 'WORK_SUPERVISOR' %}
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+
+                            <div class="card-body">
+                                <div class="py-3">
+                                    {% if latest_question_list %}
+                                        {% if not userIn %}
+                                            <a href="{% url 'polls:add_student_name' %}">Start Survey</a>
+                                        {% endif %}
+                                        
+
+                                    {% else %}
+                                        <p>No survey available.</p>
+                                    {% endif %}
+                                </div>    
+                                <div>
+                                    <a href="{% url 'polls:results' user.id %}">My Survey</a>
+                                </div>
+                            </div>
+                            
+                        
+                    </div>
+                </div>
+            </div>
+
+    {% elif user.type == 'SUPERVISOR' %}
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+
+                            <div class="card-body">
+                                <div class="py-3">
+                                    {% if users %}
+                                        {% for usr in users %}
+                                            
+                                            {{ usr }}
+                                            <!-- <div class="py-3">
+                                                Survey by: <a class="" href="{% url 'polls:results' usr.id %}">{{ usr.get_full_name }}</a>
+                                            </div> -->
+<!-- =================================================================== -->
+                                            {% if usr in supervising %}
+                                                
+                                                    <div class="py-3">
+                                                        Survey by: <a class="" href="{% url 'polls:results' user.id %}">{{ usr.get_full_name }}</a>
+                                                    </div>
+
+                                                    
+                                            {% endif %}
+
+
+<!-- =================================================================== -->
+
+
+
+
+
+
+
+
+
+                                        {% endfor %}
+                                    {% else %}
+                                        <p>No survey available.</p>
+                                    {% endif %}
+                                </div>    
+
+                            </div>
+                            
+                        
+                    </div>
+                </div>
+            </div>
+    {% elif user.type == 'STUDENT' %}
+            l
+    {% endif %}
+    
+{% endblock %}
